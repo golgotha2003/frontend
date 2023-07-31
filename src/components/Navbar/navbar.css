@@ -1,0 +1,87 @@
+/* Navbar CSS */
+/* You can customize this CSS based on your UI design */
+
+/* Navbar Brand */
+.c-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Navbar Toggler Icon Color */
+  .c-hor-nav-toggler span {
+    background-color: #333;
+  }
+  
+  /* Navbar Link */
+  .c-theme-nav .c-link {
+    font-size: 16px;
+    padding: 15px;
+    color: #333;
+  }
+  
+  /* Navbar Dropdown Menu */
+  .dropdown-menu {
+    background-color: #333;
+    border: none;
+  }
+  
+  /* Navbar Dropdown Item */
+  .dropdown-item {
+    font-size: 14px;
+    padding: 10px 20px;
+    color: #fff;
+  }
+  
+  /* Navbar Dropdown Item Hover */
+  .dropdown-item:hover {
+    background-color: #444;
+  }
+  
+  /* Navbar Dropdown Toggle */
+  .dropdown-toggle::after {
+    display: none;
+  }
+  
+  /* Navbar Active Link */
+  .c-theme-nav .active .c-link {
+    background-color: #555;
+    color: #fff;
+  }
+  
+  /* Navbar Hover Link */
+  .c-theme-nav .c-link:hover {
+    background-color: #444;
+    color: #fff;
+  }
+  
+  /* Navbar Active Dropdown Item */
+  .dropdown-menu .active,
+  .dropdown-menu .c-menu-type-classic > .c-link:hover {
+    background-color: #555;
+  }
+  
+  /* Responsive Navbar */
+  @media (max-width: 767.98px) {
+    .c-theme-nav .c-link {
+      color: #fff;
+    }
+  
+    .c-theme-nav .active .c-link,
+    .c-theme-nav .c-link:hover {
+      background-color: #333;
+    }
+  
+    .dropdown-menu {
+      background-color: #333;
+    }
+  
+    .dropdown-item {
+      color: #fff;
+    }
+  
+    .dropdown-item:hover {
+      background-color: #444;
+    }
+  }
+  

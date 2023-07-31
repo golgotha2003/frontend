@@ -1,0 +1,22 @@
+/* loginPage.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8px;
+  }
+  
+  .avatar {
+    margin: 8px;
+    background-color: #1976d2;
+  }
+  
+  .form {
+    margin-top: 1rem;
+  }
+  
+  .submitButton {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+  }
+  
