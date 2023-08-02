@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { blue } from '@mui/material/colors';
 import axios from 'axios'; // Import axios for making API requests
 import './login.css'; // Import file CSS vào trang
+import globalConfig from '../../../config';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const theme = createTheme({
   palette: {
@@ -25,12 +27,13 @@ const theme = createTheme({
 });
 
 function LoginPage() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate(); // Sử dụng hook useNavigate
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -43,24 +46,28 @@ function LoginPage() {
 
     try {
       // Make the API call to authenticate the user
-      const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
-        email: email,
+      const response = await axios.post(`${globalConfig.apiUrl}/auth/login`, {
+        username: username,
         password: password,
       });
 
       setIsLoading(false);
 
       // Check if the API call was successful and the user is authenticated
-      if (response.status === 200) {
+      if (response.data.success) {
+        const accountJson = JSON.stringify(response.data.account);
+        sessionStorage.setItem('account', accountJson);
         console.log('Login successful!');
         toast.success('Login successful!', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
           hideProgressBar: true,
         });
+
+        window.location.href = '/';
       } else {
         console.log('Login failed!');
-        toast.error('Login failed. Please check your email and password.', {
+        toast.error(response.data.message, {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
           hideProgressBar: true,
@@ -68,8 +75,8 @@ function LoginPage() {
       }
     } catch (error) {
       setIsLoading(false);
-      console.log('Login failed!');
-      toast.error('Login failed. Please check your email and password.', {
+      console.log('Login failed:', error);
+      toast.error('Login failed. Please check your username and password.', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
         hideProgressBar: true,
@@ -100,13 +107,13 @@ function LoginPage() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
-                value={email}
-                onChange={handleEmailChange}
+                value={username}
+                onChange={handleUsernameChange}
               />
               <TextField
                 margin="normal"

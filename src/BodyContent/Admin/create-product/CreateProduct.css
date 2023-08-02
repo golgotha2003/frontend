@@ -1,0 +1,64 @@
+/* Container */
+.Container {
+    padding: 20px;
+  }
+  
+  /* Paper component */
+  .Paper {
+    padding: 20px;
+    text-align: center;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+  }
+  
+  /* Typography */
+  .Typography-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Form */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* Form fields */
+  .TextField {
+    width: 100%;
+  }
+  
+  /* FormControl */
+  .FormControl {
+    width: 100%;
+  }
+  
+  /* Image preview */
+  .image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .preview-image {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  /* Add these styles to center the form and loading spinner */
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .loadingContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  

@@ -12,9 +12,11 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-
+import { Link } from 'react-router-dom';
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard'];
+const accountJson = sessionStorage.getItem('account');
+let account = JSON.parse(accountJson);
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,6 +37,12 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const logout = () => {
+    sessionStorage.setItem('account', null); // Chuyển account thành null khi logout
+    account = null; // Cập nhật biến account để hiển thị nút Login và Register
+    window.location.href = '/login'
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -43,8 +51,8 @@ function ResponsiveAppBar() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
+
+            component={Link} to="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -92,6 +100,7 @@ function ResponsiveAppBar() {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
+
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -123,14 +132,42 @@ function ResponsiveAppBar() {
                 {page}
               </Button>
             ))}
+            {account && (account.role === 2 || account.role === 3) && ( // Show the Admin Panel button for roles 2 and 3
+              <Button
+                onClick={() => { window.location.href = '/admin/dashboard'; }}
+                sx={{
+                  display: 'block',
+                  my: 2,
+                  backgroundColor: '#ff5722',
+                  color: 'white',
+                  '&:hover': {
+                    backgroundColor: '#ff7043',
+                  },
+                }}
+              >
+                Admin Panel
+              </Button>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            {account ? ( // Kiểm tra nếu account có giá trị
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              // Nếu account là null thì hiển thị nút Login và Register
+              <>
+                <Button component={Link} to="/login" color="inherit" sx={{ mx: 1 }}>
+                  Login
+                </Button>
+                <Button component={Link} to="/register" color="inherit" sx={{ mx: 1 }}>
+                  Register
+                </Button>
+              </>
+            )}
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -147,16 +184,24 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {account && ( // Kiểm tra nếu account có giá trị
+                settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))
+              )}
+              {account && ( // Kiểm tra nếu account có giá trị
+                <MenuItem onClick={logout}>
+                  <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
-              ))}
+              )}
             </Menu>
-          </Box> 
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;

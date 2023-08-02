@@ -1,0 +1,121 @@
+/* Đảm bảo sidebar chiếm 240px Width */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-left: 240px; /* Bỏ lề bên trái để nhường chỗ cho sidebar */
+  }
+  
+  .paper {
+    padding: 16px;
+    width: 100%;
+     /* Giới hạn chiều rộng tối đa của .paper để tránh lấn chiếm sidebar */
+  }
+  
+  .searchContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .searchInput {
+    flex: 1;
+    margin-right: 8px;
+  }
+  
+  .loadingContainer {
+    display: flex;
+    justify-content: center;
+    margin: 16px;
+  }
+  
+  /* Xóa các styles không cần thiết */
+  .userList {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .userItem {
+    /* Xóa border-bottom và padding, do ta sẽ sử dụng table để hiển thị dữ liệu */
+    margin: 4px;
+    border-radius: 4px;
+    width: calc(100% - 8px);
+  }
+  
+  .userInfoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .username {
+    font-weight: bold;
+  }
+  
+  .roleContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .roleLabel {
+    margin-right: 8px;
+  }
+  
+  .roleButton {
+    background-color: #2196f3;
+    color: white;
+    padding: 6px 12px;
+    text-transform: none;
+  }
+  
+  /* Adjust the page layout */
+  .pageContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Ensure the pageContent takes up the full width */
+  }
+  
+  .pageTitle {
+    margin-bottom: 16px;
+  }
+  
+  /* Adjust the user information blocks */
+  .userItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 8px);
+  }
+  
+  .username {
+    flex: 2;
+  }
+  
+  .roleContainer {
+    flex: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .roleButton {
+    flex: 1;
+    background-color: #2196f3;
+    color: white;
+    padding: 6px 12px;
+    text-transform: none;
+  }
+  
+  .tableHeadCell {
+    font-weight: bold;
+    background-color: #f0f0f0; /* Sử dụng màu sắc nền khác biệt */
+  }
+  

@@ -18,7 +18,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { blue } from '@mui/material/colors';
 import axios from 'axios'; // Import axios for making API requests
 import './register.css'; // Import file CSS vào trang
-
+import globalConfig from '../../../config';
 const theme = createTheme({
   palette: {
     primary: {
@@ -78,7 +78,7 @@ function RegisterPage() {
 
     try {
       // Make the API call to register the user
-      const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
+      const response = await axios.post(`${globalConfig.apiUrl}/auth/register`, {
         username: username,
         email: email,
         password: password,
@@ -87,16 +87,16 @@ function RegisterPage() {
       setIsLoading(false);
 
       // Check if the API call was successful and the user is registered
-      if (response.status === 201) {
-        console.log('Registration successful!');
-        toast.success('Registration successful!', {
+      if (response.data.success) {
+        console.log('Registration successful:', response.data.account);
+        toast.success(`Registration successful. Username: ${response.data.account.username}, Email: ${response.data.account.email}`, {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
           hideProgressBar: true,
         });
       } else {
         console.log('Registration failed!');
-        toast.error('Registration failed. Please try again later.', {
+        toast.error(response.data.message, {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
           hideProgressBar: true,
@@ -104,8 +104,8 @@ function RegisterPage() {
       }
     } catch (error) {
       setIsLoading(false);
-      console.log('Registration failed!');
-      toast.error('Registration failed. Please try again later.', {
+      console.log('Registration failed:', error.message);
+      toast.error(`Registration failed. ${error.message}`, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
         hideProgressBar: true,
