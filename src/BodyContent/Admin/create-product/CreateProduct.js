@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Typography,
   Container,
@@ -49,11 +49,21 @@ const CreateProduct = () => {
   const [tuong, setTuong] = useState(0);
   const [rank, setRank] = useState('Khong-rank');
 
-  const [phai, setPhai] = useState('');
+  const [phai, setPhai] = useState('Chien-Binh');
+  const [serverhso, setServerhso] = useState('Chien-Than');
 
   const [images, setImages] = useState([]);
   const [maxImages, setMaxImages] = useState(5);
   const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (account){
+        if (account.role !== 3 && account.role !== 2)
+        window.location.href = '/'
+    }
+    else{
+        window.location.href = '/login'
+    }
+  }, []);
   const isPositiveInteger = (value) => {
     return /^\d+$/.test(value) && parseInt(value) >= 0;
   };
@@ -84,7 +94,7 @@ const CreateProduct = () => {
     setIsLoading(true);
     let apiUrl = '';
     let formData = {};
-  
+
     if (productType === 'ngoc-rong') {
       apiUrl = `${globalConfig.apiUrl}/ngocrong/create`;
       formData = {
@@ -125,12 +135,12 @@ const CreateProduct = () => {
         password,
         content,
         phai,
-        server,
-        deTu,
+        sever: serverhso,
+        de_tu: deTu,
         images: images.join(' , '),
       };
     }
-  
+
     try {
       const response = await axios.post(apiUrl, formData);
       console.log('Response:', response.data);
@@ -174,12 +184,12 @@ const CreateProduct = () => {
       setIsLoading(false); // Tắt loading sau khi hoàn thành request
     }
   };
-  
+
 
   return (
     <Container>
       <Paper className="Paper">
-      
+
         <Typography variant="h4" className="Typography-title">
           Tạo Sản Phẩm
         </Typography>
@@ -336,14 +346,41 @@ const CreateProduct = () => {
             </>
           )}
           {productType === 'hiep-si-online' && (
+
             <>
-              <TextField
-                label="Phái"
-                variant="outlined"
-                value={phai}
-                onChange={(e) => setPhai(e.target.value)}
-                className="TextField"
-              />
+              <FormControl variant="outlined" className="FormControl">
+                <InputLabel id="server-label">Server</InputLabel>
+                <Select
+                  labelId="server-label"
+                  id="server"
+                  value={serverhso}
+                  onChange={(e) => setServerhso(e.target.value)}
+                  label="Serverhso"
+                >
+                  <MenuItem value="Chien-Than">Chiến Thần</MenuItem>
+                  <MenuItem value="Rong-Lua">Rồng Lửa</MenuItem>
+                  <MenuItem value="Phuong-Hoang">Phượng Hoàng</MenuItem>
+                  <MenuItem value="Nhan-Ma">Nhân Mã</MenuItem>
+                  <MenuItem value="Ki Lan">Kì Lân</MenuItem>
+
+
+                </Select>
+              </FormControl>
+              <FormControl variant="outlined" className="FormControl">
+                <InputLabel id="phai-label">Phái</InputLabel>
+                <Select
+                  labelId="phai-label"
+                  id="phai"
+                  value={phai}
+                  onChange={(e) => setPhai(e.target.value)}
+                  label="Phai"
+                >
+                  <MenuItem value="Chien-Binh">Chiến Binh</MenuItem>
+                  <MenuItem value="Sat-Thu">Sát Thủ</MenuItem>
+                  <MenuItem value="Phap-Su">Pháp Sư</MenuItem>
+                  <MenuItem value="Xa-Thu">Xạ Thủ</MenuItem>
+                </Select>
+              </FormControl>
               <FormControl variant="outlined" className="FormControl">
                 <InputLabel id="de-tu-label">Đệ Tử</InputLabel>
                 <Select
@@ -398,7 +435,7 @@ const CreateProduct = () => {
             </div>
           </div>
           <Button type="submit" variant="contained" color="primary" className="submit-button" disabled={isLoading}>
-          {isLoading ? ( // Nếu isLoading true thì hiển thị loading spinner
+            {isLoading ? ( // Nếu isLoading true thì hiển thị loading spinner
               <CircularProgress size={24} color="inherit" />
             ) : (
               'Tạo Sản Phẩm' // Nếu isLoading false thì hiển thị nút bình thường
