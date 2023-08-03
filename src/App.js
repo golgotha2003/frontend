@@ -12,6 +12,7 @@ import AdminDashboard from './BodyContent/Admin/AdminDashboard/AdminDashboard';
 import AdminUsers from './BodyContent/Admin/AdminUsers/AdminUsers';
 import AdminSettings from './BodyContent/Admin/AdminSettings/AdminSettings';
 import CreateProduct from './BodyContent/Admin/create-product/CreateProduct';
+import ManageProduct from './BodyContent/Admin/ManageProduct/ManageProduct';
 
 const App = () => {
   // Determine whether to show the Sidebar or not based on the route path
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/settings" element={<AdminSettings />} />
         <Route path="/admin/create-product" element={<CreateProduct />} />
+        <Route path="/admin/manage-products" element={<ManageProduct />} />
       </Routes>
       <Footer />
     </BrowserRouter>

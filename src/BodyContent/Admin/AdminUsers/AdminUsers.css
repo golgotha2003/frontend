@@ -8,8 +8,10 @@
   }
   
   .paper {
+    margin-left: 240px;
     padding: 16px;
     width: 100%;
+    max-width: 800px;
      /* Giới hạn chiều rộng tối đa của .paper để tránh lấn chiếm sidebar */
   }
   

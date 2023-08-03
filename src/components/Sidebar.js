@@ -11,6 +11,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import StorageIcon from '@mui/icons-material/Storage';
 
 const drawerWidth = 240;
 const accountJson = sessionStorage.getItem('account');
@@ -39,12 +40,12 @@ const Sidebar = () => {
                             <ListItemText primary="Users" />
                         </ListItem>
                     }
-                    {/* Change "Tạo sản phẩm" to "Create Product" */}
-                    <ListItem button component={Link} to="/admin/create-product">
+                    
+                    <ListItem button component={Link} to="/admin/manage-products">
                         <ListItemIcon>
-                            <AddCircleOutlineIcon />
+                            <StorageIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Create Product" />
+                        <ListItemText primary="Manage Products" />
                     </ListItem>
                 </List>
                 <Divider />

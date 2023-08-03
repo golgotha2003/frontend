@@ -1,12 +1,14 @@
 /* Container */
 .Container {
     padding: 20px;
+   
   }
   
   /* Paper component */
   .Paper {
     padding: 20px;
     text-align: center;
+    margin-left: 240px;
     color: #333;
     background-color: #fff;
     border: 1px solid #ccc;
