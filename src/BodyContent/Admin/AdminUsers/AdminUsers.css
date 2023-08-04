@@ -1,11 +1,5 @@
 /* Đảm bảo sidebar chiếm 240px Width */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    
-  }
+
   
   .paper {
     margin-left: 240px;

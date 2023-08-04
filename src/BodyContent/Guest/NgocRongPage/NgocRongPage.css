@@ -1,0 +1,43 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    height: 200px;
+}
+.product {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+.card img {
+    max-height: 200px;
+    width: 200px;
+    width: 100%;
+    height: 100%;
+
+ 
+  margin-bottom: 10px;
+}
+.attribute-content {
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    border: 1px solid #ccc;
+    color: white; /* Chữ in đậm màu trắng */
+  background-color: #8B4513; /* Nền màu nâu */
+  padding: 4px 8px; /* Thêm padding cho chữ */
+  border-radius: 8px;
+  }
+
+.attribute-container {
+    /* CSS cho container chứa attribute */
+    flex-basis: 50%; /* Độ rộng 50%, tức là 2 attribute trên cùng 1 hàng */
+  }
+  
+  .attribute-item {
+    /* CSS cho mỗi attribute */
+    margin-bottom: 8px; /* Khoảng cách giữa các attribute */
+  }

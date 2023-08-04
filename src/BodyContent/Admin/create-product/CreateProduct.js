@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import {
   Typography,
   Container,
@@ -92,59 +93,78 @@ const CreateProduct = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
-    let apiUrl = '';
-    let formData = {};
-
-    if (productType === 'ngoc-rong') {
-      apiUrl = `${globalConfig.apiUrl}/ngocrong/create`;
-      formData = {
-        id_account: account.id,
-        productType,
-        amount: price,
-        username,
-        password,
-        content,
-        sever: server,
-        hanh_tinh: hanhTinh,
-        bong_tai: bongTai,
-        de_tu: deTu,
-        suc_manh: sucManh,
-        images: images.join(' , '),
-      };
-    } else if (productType === 'lien-minh') {
-      apiUrl = `${globalConfig.apiUrl}/lienminh/create`;
-      formData = {
-        id_account: account.id,
-        productType,
-        amount: price,
-        username,
-        password,
-        content,
-        skin,
-        tuong,
-        rank,
-        images: images.join(' , '),
-      };
-    } else if (productType === 'hiep-si-online') {
-      apiUrl = `${globalConfig.apiUrl}/hiepsi/create`;
-      formData = {
-        id_account: account.id,
-        productType,
-        amount: price,
-        username,
-        password,
-        content,
-        phai,
-        sever: serverhso,
-        de_tu: deTu,
-        images: images.join(' , '),
-      };
-    }
-
+  
+    const cloudName = 'dulapxpnp';
+    const presetKey = 'ml_default';
+  
     try {
+      const imageUrls = await Promise.all(
+        images.map(async (base64Image) => {
+          const response = await axios.post(
+            `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
+            {
+              file: base64Image,
+              upload_preset: presetKey,
+              public_id: `product-image-${uuidv4()}`, // Tạo public_id unique cho mỗi ảnh
+            }
+          );
+  
+          return response.data.secure_url;
+        })
+      );
+  
+      let apiUrl = '';
+      let formData = {};
+  
+      if (productType === 'ngoc-rong') {
+        apiUrl = `${globalConfig.apiUrl}/ngocrong/create`;
+        formData = {
+          id_account: account.id,
+          productType,
+          amount: price,
+          username,
+          password,
+          content,
+          sever: server,
+          hanh_tinh: hanhTinh,
+          bong_tai: bongTai,
+          de_tu: deTu,
+          suc_manh: sucManh,
+          images: imageUrls.join(' , '),
+        };
+      } else if (productType === 'lien-minh') {
+        apiUrl = `${globalConfig.apiUrl}/lienminh/create`;
+        formData = {
+          id_account: account.id,
+          productType,
+          amount: price,
+          username,
+          password,
+          content,
+          skin,
+          tuong,
+          rank,
+          images: imageUrls.join(' , '),
+        };
+      } else if (productType === 'hiep-si-online') {
+        apiUrl = `${globalConfig.apiUrl}/hiepsi/create`;
+        formData = {
+          id_account: account.id,
+          productType,
+          amount: price,
+          username,
+          password,
+          content,
+          phai,
+          sever: serverhso,
+          de_tu: deTu,
+          images: imageUrls.join(' , '),
+        };
+      }
+  
       const response = await axios.post(apiUrl, formData);
       console.log('Response:', response.data);
-
+  
       if (response.data.success) {
         // Hiển thị thông báo toast khi thành công
         toast.success('Tạo sản phẩm thành công!', {
@@ -413,7 +433,7 @@ const CreateProduct = () => {
                 disabled={images.length >= maxImages}
                 className="image-upload-button"
               >
-                Thêm Ảnh (Tối đa 5)
+                Thêm Ảnh
               </Button>
             </label>
             <div className="image-preview-container">

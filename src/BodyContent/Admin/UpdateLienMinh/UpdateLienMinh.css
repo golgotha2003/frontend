@@ -1,0 +1,18 @@
+/* CSS for the image container */
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* CSS for individual images */
+  .image {
+    width: 100%; /* You can adjust the width as needed */
+  height: 100%; /* You can adjust the height as needed */
+  max-width: 800px; 
+  max-height: 400px;
+    margin: 10px; /* You can adjust the margin as needed */
+    object-fit: cover; /* Preserve aspect ratio and cover the container */
+    border: 1px solid #ccc; /* Add a border around each image (optional) */
+  }

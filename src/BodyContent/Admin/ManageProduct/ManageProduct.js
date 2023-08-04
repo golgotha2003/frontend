@@ -28,7 +28,7 @@ import './ManageProduct.css';
 import Pagination from '@mui/material/Pagination';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useNavigate } from 'react-router-dom';
 const ManageProduct = () => {
   const [products, setProducts] = useState([]);
   const [filterName, setFilterName] = useState('Tất cả');
@@ -37,17 +37,23 @@ const ManageProduct = () => {
   const [page, setPage] = useState(1);
   const productsPerPage = 5;
   const [loading, setLoading] = useState(false);
+  const accountJson = sessionStorage.getItem('account');
+  let account = JSON.parse(accountJson);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!account){
+      navigate('/');
+    }
     fetchProducts();
   }, [filterName, filterStatus, filterPrice, page]);
 
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const api1Response = await axios.get(`${globalConfig.apiUrl}/ngocrong/getall`);
-      const api2Response = await axios.get(`${globalConfig.apiUrl}/lienminh/getall`);
-      const api3Response = await axios.get(`${globalConfig.apiUrl}/hiepsi/getall`);
+      const api1Response = await axios.get(`${globalConfig.apiUrl}/ngocrong/getallBySeller/${account.id}`);
+      const api2Response = await axios.get(`${globalConfig.apiUrl}/lienminh/getallBySeller/${account.id}`);
+      const api3Response = await axios.get(`${globalConfig.apiUrl}/hiepsi/getallBySeller/${account.id}`);
 
       const api1Products = api1Response.data.ngocrongs.map((item) => ({
         id: item.id,
@@ -61,7 +67,7 @@ const ManageProduct = () => {
       const api2Products = api2Response.data.lienminhs.map((item) => ({
         id: item.id,
         name: 'Liên Minh',
-        description: item.context,
+        description: item.content,
         price: item.amount,
         status: item.status,
         role : 'lienminh',
@@ -70,7 +76,7 @@ const ManageProduct = () => {
       const api3Products = api3Response.data.hiepsis.map((item) => ({
         id: item.id,
         name: 'Hiệp Sĩ Online',
-        description: item.context,
+        description: item.content,
         price: item.amount,
         status: item.status,
         role : 'hiepsi',

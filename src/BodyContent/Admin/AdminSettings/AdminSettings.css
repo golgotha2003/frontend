@@ -1,8 +1,9 @@
 /* CSS cho trang AdminSettings */
 
 /* Container */
-.Container {
+.container {
     padding: 20px;
+    min-height: 650px;
   }
   
   /* Paper component */

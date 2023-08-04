@@ -100,6 +100,9 @@ function ResponsiveAppBar() {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
+              <MenuItem onClick={() => { window.location.href = '/admin/dashboard'; }}>
+                  <Typography textAlign="center">Admin Panel</Typography>
+                </MenuItem>
 
             </Menu>
           </Box>
