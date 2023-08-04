@@ -1,6 +1,6 @@
 // config.js
 const globalConfig = {
-  apiUrl: 'https://shopacc.onrender.com'
+  apiUrl: 'https://shopacc.onrender.com/api'
 
 
     // apiUrl: 'http://localhost:3000/api', // Thay đổi giá trị theo yêu cầu của bạn
