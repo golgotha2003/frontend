@@ -13,7 +13,7 @@ import {
   CircularProgress,
   IconButton,
   Input,
-  
+
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useParams } from 'react-router-dom';
@@ -39,11 +39,11 @@ const UpdateHiepsi = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
   const cloudName = 'dulapxpnp';
-const presetKey = 'ml_default';
-const accountJson = sessionStorage.getItem('account');
+  const presetKey = 'ml_default';
+  const accountJson = sessionStorage.getItem('account');
   let account = JSON.parse(accountJson);
   const navigate = useNavigate();
-  
+
 
   useEffect(() => {
     // Gọi API để lấy thông tin tài khoản Hiepsi
@@ -51,7 +51,7 @@ const accountJson = sessionStorage.getItem('account');
       try {
         const response = await axios.get(`${globalConfig.apiUrl}/hiepsi/account-info/${id}`);
         setAccountInfo(response.data.accountInfo);
-        
+
       } catch (error) {
         console.error('Error:', error);
         toast.error('Không thể tải thông tin tài khoản!', {
@@ -64,10 +64,10 @@ const accountJson = sessionStorage.getItem('account');
           progress: undefined,
         });
       }
-      
+
     };
 
-    
+
     const fetchImages = async () => {
       try {
         const response = await axios.get(`${globalConfig.apiUrl}/imageshiepsi/getByAccGameId/${id}`);
@@ -93,11 +93,11 @@ const accountJson = sessionStorage.getItem('account');
   useEffect(() => {
     // Gán các giá trị từ accountInfo vào các state
     if (accountInfo) {
-      if (account === null){
+      if (account === null) {
         navigate('/');
       }
-      else{
-        if (account.id !==accountInfo.id_account){
+      else {
+        if (account.id !== accountInfo.id_account) {
           navigate('/');
         }
       }
@@ -109,7 +109,7 @@ const accountJson = sessionStorage.getItem('account');
       setPhai(accountInfo.phai);
       setDeTu(accountInfo.de_tu);
       setStatus(accountInfo.status.toString()); // Chuyển status sang dạng chuỗi để dễ quản lý
-      
+
     }
   }, [accountInfo]);
   const handleKeyPress = (event) => {
@@ -230,17 +230,17 @@ const accountJson = sessionStorage.getItem('account');
     try {
       // Post the file to the Cloudinary API using axios
       const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData);
-     
+
       if (response.data && response.data.secure_url) {
         // Add the uploaded image URL to the state
         setImages((prevImages) => [...prevImages, { id: response.data.public_id, dataImage: response.data.secure_url }]);
-        const imageUrl= response.data.secure_url;
-        await axios.post(`${globalConfig.apiUrl}/imageshiepsi/add`,{
+        const imageUrl = response.data.secure_url;
+        await axios.post(`${globalConfig.apiUrl}/imageshiepsi/add`, {
           id_accgame: id,
           imageUrl
 
-        }  );
-        
+        });
+
 
         toast.success('Upload ảnh thành công!', {
           position: 'top-right',
@@ -317,7 +317,7 @@ const accountJson = sessionStorage.getItem('account');
               className="TextField"
               onKeyPress={handleKeyPress}
             />
-             <FormControl className="FormControl">
+            <FormControl className="FormControl">
               <InputLabel id="server-label">Server</InputLabel>
               <Select
                 labelId="server-label"
@@ -326,14 +326,14 @@ const accountJson = sessionStorage.getItem('account');
                 onChange={(e) => setServer(e.target.value)}
               >
                 <MenuItem value="Chien-Than">Chiến Thần</MenuItem>
-                  <MenuItem value="Rong-Lua">Rồng Lửa</MenuItem>
-                  <MenuItem value="Phuong-Hoang">Phượng Hoàng</MenuItem>
-                  <MenuItem value="Nhan-Ma">Nhân Mã</MenuItem>
-                  <MenuItem value="Ki Lan">Kì Lân</MenuItem>
+                <MenuItem value="Rong-Lua">Rồng Lửa</MenuItem>
+                <MenuItem value="Phuong-Hoang">Phượng Hoàng</MenuItem>
+                <MenuItem value="Nhan-Ma">Nhân Mã</MenuItem>
+                <MenuItem value="Ki Lan">Kì Lân</MenuItem>
               </Select>
             </FormControl>
 
-            
+
 
             {/* Trường chọn đệ tử */}
             <FormControl className="FormControl">
@@ -359,13 +359,13 @@ const accountJson = sessionStorage.getItem('account');
                 onChange={(e) => setPhai(e.target.value)}
               >
                 <MenuItem value="Chien-Binh">Chiến Binh</MenuItem>
-                  <MenuItem value="Sat-Thu">Sát Thủ</MenuItem>
-                  <MenuItem value="Phap-Su">Pháp Sư</MenuItem>
-                  <MenuItem value="Xa-Thu">Xạ Thủ</MenuItem>
+                <MenuItem value="Sat-Thu">Sát Thủ</MenuItem>
+                <MenuItem value="Phap-Su">Pháp Sư</MenuItem>
+                <MenuItem value="Xa-Thu">Xạ Thủ</MenuItem>
               </Select>
             </FormControl>
 
-            
+
             <input
               type="file"
               accept="image/*"
@@ -399,7 +399,7 @@ const accountJson = sessionStorage.getItem('account');
         ) : (
           <Typography variant="body1">Đang tải thông tin tài khoản... </Typography>
         )}
-       
+
       </Paper>
       <ToastContainer />
     </Container>

@@ -17,6 +17,8 @@ import UpdateNgocRong from './BodyContent/Admin/UpdateNgocRong/UpdateNgocrong';
 import UpdateLienMinh from './BodyContent/Admin/UpdateLienMinh/UpdateLienMinh';
 import UpdateHiepsi from './BodyContent/Admin/UpdateHiepSi/UpdateHiepsi';
 import NgocRong from './BodyContent/Guest/NgocRongPage/NgocRongPage';
+import LienMinh from './BodyContent/Guest/LienMinhPage/LienMinhPage';
+import HiepSi from './BodyContent/Guest/HiepSiPage/HiepSiPage';
 
 const App = () => {
   // Determine whether to show the Sidebar or not based on the route path
@@ -32,6 +34,8 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/ngocrong" element={<NgocRong />} />
+        <Route path="/lienminh" element={<LienMinh />} />
+        <Route path="/hiepsi" element={<HiepSi />} />
         {/* Add other routes for the admin pages */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/users" element={<AdminUsers />} />

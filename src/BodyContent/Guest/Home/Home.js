@@ -71,7 +71,7 @@ function HomePage() {
                 image={logoHso}
                 title="Hiệp sĩ online"
                 content="This is a short description of products in Category 1."
-                link="/ngocrong"
+                link="/hiepsi"
               />
             </div>
             {/* Category Section 2 */}
@@ -80,7 +80,7 @@ function HomePage() {
                 image={logoLMHT}
                 title="Liên minh huyền thoại"
                 content="This is a short description of products in Category 2."
-                link="/ngocrong"
+                link="/lienminh"
               />
             </div>
             {/* Category Section 3 */}
