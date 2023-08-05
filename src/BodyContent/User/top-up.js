@@ -10,8 +10,7 @@ const TopUpWallet = () => {
   useEffect(() => {
     if (account === null) {
       window.location.href = '/login';
-    }
-    setNote(account.username);
+    } else { setNote(account.username); }
   }, [account]);
 
   return (
@@ -25,7 +24,7 @@ const TopUpWallet = () => {
             MOMO: 0911413402
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Nội dung chuyển khoản: nap tien {account.username}
+            Nội dung chuyển khoản: nap tien {note}
           </Typography>
           <img
             src={`https://momosv3.apimienphi.com/api/QRCode?phone=0911413402&amount=0&note=${note}`}

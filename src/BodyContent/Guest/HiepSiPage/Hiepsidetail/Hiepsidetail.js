@@ -204,7 +204,7 @@ const HiepsiDetailsPage = () => {
                                         size="small"
                                         className="topUpButton"
                                         component={Link}
-                                        to={`/topup`}
+                                        to={`/user/nap-tien`}
 
                                     >
                                         <MonetizationOnOutlined /> Nạp Tiền
