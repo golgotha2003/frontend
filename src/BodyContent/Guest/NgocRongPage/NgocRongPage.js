@@ -3,7 +3,7 @@ import axios from 'axios';
 import globalConfig from '../../../config';
 import { Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Box from '@mui/material/Box';
+import { Box, Button } from '@mui/material';
 import { Typography, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import { Link } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -90,6 +90,7 @@ const NgocRongPage = () => {
                     </div>
 
                     <div className="attribute-content">{account.content}</div>
+                    
 
                     <div className="attribute-container">
                         <p className="attribute-item">Server: {account.sever}</p>

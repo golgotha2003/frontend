@@ -23,7 +23,7 @@ const HiepSiPage = () => {
 
     useEffect(() => {
         axios
-            .get(`${globalConfig.apiUrl}/HiepSi/getall`)
+            .get(`${globalConfig.apiUrl}/hiepsi/getall`)
             .then((response) => {
                 const fetchedAccounts = response.data.hiepsis;
 
@@ -71,6 +71,21 @@ const HiepSiPage = () => {
             default:
                 return classCode;
         }
+    }; const getServer = (serverCode) => {
+        switch (serverCode) {
+            case 'Chien-Than':
+                return 'Chiến Thần';
+            case 'Rong-Lua':
+                return 'Rồng Lửa';
+            case 'Phuong-Hoang':
+                return 'Phượng Hoàng';
+            case 'Nhan-Ma':
+                return 'Nhân Mã';
+            case 'Ki-Lan':
+                return 'Kì Lân';
+            default:
+                return serverCode;
+        }
     };
 
     const getYesNoValue = (value) => {
@@ -82,7 +97,8 @@ const HiepSiPage = () => {
     };
 
     const CategorySection = ({ account }) => {
-        const className = getClass(account.phai);
+        const phaiName = getClass(account.phai);
+        const serverName = getServer(account.sever);
         return (
             <Box className="categorySection">
                 <div className="product">
@@ -93,15 +109,15 @@ const HiepSiPage = () => {
                     <div className="attribute-content">{account.content}</div>
 
                     <div className="attribute-container">
-                        <p className="attribute-item">Server: {account.sever}</p>
+                        <p className="attribute-item">Server: {serverName}</p>
                         <p className="attribute-item">Đệ tử: {getYesNoValue(account.de_tu)}</p>
                         <Typography variant="body1" className="attribute-item">
                             <MonetizationOn />{formatAmount(account.amount)} VNĐ
                         </Typography>
                     </div>
                     <div className="attribute-container">
-                        <p className="attribute-item">Phái: {getClass}</p>
-                        <Link to={`/HiepSi/${account.id}`} className="viewNowButton">
+                        <p className="attribute-item">Phái: {phaiName}</p>
+                        <Link to={`/hiepsi/${account.id}`} className="viewNowButton">
                             Xem Ngay
                         </Link>
                     </div>
@@ -135,8 +151,7 @@ const HiepSiPage = () => {
                 case 200000:
                     if (amount < 50000 || amount >= 200000) {
                         return false;
-                    }
-                    break;
+                    } break;
                 case 500000:
                     if (amount < 200000 || amount >= 500000) {
                         return false;
@@ -177,7 +192,6 @@ const HiepSiPage = () => {
                             <InputLabel>Server</InputLabel>
                             <Select value={filterServer} onChange={(e) => setFilterServer(e.target.value)} label='Server'>
                                 <MenuItem value="Tất cả Server">Tất cả Server</MenuItem>
-
                                 <MenuItem value="Chien-Than">Chiến Thần</MenuItem>
                                 <MenuItem value="Rong-Lua">Rồng Lửa</MenuItem>
                                 <MenuItem value="Phuong-Hoang">Phượng Hoàng</MenuItem>
@@ -196,8 +210,7 @@ const HiepSiPage = () => {
                                 <MenuItem value="Xa-Thu">Xạ Thủ</MenuItem>
                             </Select>
                         </FormControl>
-                        <FormControl variant="outlined" className="filter-control">
-                            <InputLabel>Đệ tử</InputLabel>
+                        <FormControl variant="outlined" className="filter-control"><InputLabel>Đệ tử</InputLabel>
                             <Select value={filterDeTu} onChange={(e) => setFilterDeTu(e.target.value)}>
                                 <MenuItem value="Không chọn">Không chọn</MenuItem>
                                 <MenuItem value={false}>Không</MenuItem>

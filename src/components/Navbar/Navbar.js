@@ -48,11 +48,11 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
+          <Button
             variant="h6"
             noWrap
 
-            component={Link} to="/"
+            onClick={() => { window.location.href = '/'; }}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -64,7 +64,7 @@ function ResponsiveAppBar() {
             }}
           >
             LOGO
-          </Typography>
+          </Button>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -95,14 +95,10 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              
               <MenuItem onClick={() => { window.location.href = '/admin/dashboard'; }}>
-                  <Typography textAlign="center">Admin Panel</Typography>
-                </MenuItem>
+                <Typography textAlign="center">Admin Panel</Typography>
+              </MenuItem>
 
             </Menu>
           </Box>
@@ -126,15 +122,7 @@ function ResponsiveAppBar() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            
             {account && (account.role === 2 || account.role === 3) && ( // Show the Admin Panel button for roles 2 and 3
               <Button
                 onClick={() => { window.location.href = '/admin/dashboard'; }}
@@ -187,17 +175,15 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {account && ( // Kiểm tra nếu account có giá trị
-                settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))
-              )}
+              <MenuItem onClick={handleCloseUserMenu}>
+              <Button textAlign="center" 
+                 onClick={() => { window.location.href = '/user/profile'} }>Profile</Button>
+              </MenuItem>
+              
               {account && ( // Kiểm tra nếu account có giá trị
                 <MenuItem onClick={logout}>
                   <Typography textAlign="center">Logout</Typography>
-                </MenuItem>
+                </MenuItem>     
               )}
             </Menu>
           </Box>

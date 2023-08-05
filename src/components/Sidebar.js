@@ -50,12 +50,7 @@ const Sidebar = () => {
                 </List>
                 <Divider />
                 <List>
-                    <ListItem button component={Link} to="/admin/settings">
-                        <ListItemIcon>
-                            <SettingsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Settings" />
-                    </ListItem>
+                    
                     <ListItem button onClick={home}>
                         <ListItemIcon>
                             <ExitToAppIcon />
