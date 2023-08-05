@@ -70,7 +70,7 @@ function HomePage() {
               <CategorySection
                 image={logoHso}
                 title="Hiệp sĩ online"
-                content="This is a short description of products in Category 1."
+                content=""
                 link="/hiepsi"
               />
             </div>
@@ -79,7 +79,7 @@ function HomePage() {
               <CategorySection
                 image={logoLMHT}
                 title="Liên minh huyền thoại"
-                content="This is a short description of products in Category 2."
+                content=""
                 link="/lienminh"
               />
             </div>
@@ -88,7 +88,7 @@ function HomePage() {
               <CategorySection
                 image={logoNro}
                 title="Ngọc rồng online"
-                content="This is a short description of products in Category 3."
+                content=""
                 link="/ngocrong"
               />
             </div>
